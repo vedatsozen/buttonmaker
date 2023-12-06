@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUTTON MAKER TOOL by Vedat Sözen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<div id="dashboard">
+<h1>Button Maker</h1>
+
+<label>Button Text</label>
+<input type="text" id="text" onchange="adjustButton()">
+
+<label>Height</label>
+<input type="number" id="height" onchange="adjustButton()">
+
+<label>Width</label>
+<input type="number" id="width" max="400" onchange="adjustButton()">
+
+<label>Background Color</label>
+<input type="color" id="bgcolor" onchange="adjustButton()">
+
+<label>Hover Color</label>
+<input type="color" id="hovercolor" onchange="adjustButton()">
+
+<label>Color</label>
+<input type="color" id="color" onchange="adjustButton()">
+
+<label>Border Radius</label>
+<input type="number" id="borderradius" onchange="adjustButton()">
+
+<label>Font Size</label>
+<input type="number" id="fontsize" min="0" onchange="adjustButton()">
+
+<label>Letter Spacing</label>
+<input type="number" id="letterspacing" min="0" onchange="adjustButton()">
+
+
+</div>
+
+
+<button id="explorebtn">Style Button</button>
+
+<div id="copydiv">
+<p>Please click copy icon to copy button class code</p>
+<i id="copyicon" class="copy bi bi-copy"></i>
+</div>
+
+
+</body>
+<script>
+
+function adjustButton() {
+
+let buttonHeight = document.getElementById("height").value;
+let buttonWidth = document.getElementById("width").value;
+let bgcolor = document.getElementById("bgcolor").value;
+let hovercolor = document.getElementById("hovercolor").value;
+let color = document.getElementById("color").value;
+let borderradius = document.getElementById("borderradius").value;
+let fontsize = document.getElementById("fontsize").value;
+let letterspacing = document.getElementById("letterspacing").value;
+let text = document.getElementById("text").value;
+
+let button = document.getElementById("explorebtn");
+
+button.style.height = buttonHeight + "px";
+button.style.width = buttonWidth + "px";
+button.style.backgroundColor = bgcolor ;
+button.style.color = color ;
+button.style.borderRadius = borderradius + "px";
+button.style.fontSize = fontsize + "px";
+button.style.letterSpacing = letterspacing + "px";
+button.innerHTML = text;
+
+button.addEventListener("mouseover", function() {
+button.style.backgroundColor = hovercolor;
+})
+
+button.addEventListener("mouseleave", function() {
+button.style.backgroundColor = bgcolor;
+})
+
+}
+
+function copyCode() {
+    
+let buttonHeight = document.getElementById("height").value;
+let buttonWidth = document.getElementById("width").value;
+let bgcolor = document.getElementById("bgcolor").value;
+let hovercolor = document.getElementById("hovercolor").value;
+let color = document.getElementById("color").value;
+let borderradius = document.getElementById("borderradius").value;
+let fontsize = document.getElementById("fontsize").value;
+let letterspacing = document.getElementById("letterspacing").value;
+let text = document.getElementById("text").value;
+
+let cssCode = `
+        .buttonClass {
+            height: ${buttonHeight}px;
+            width: ${buttonWidth}px;
+            background-color: ${bgcolor};
+            color: ${color};
+            border-radius: ${borderradius}px;
+            font-size: ${fontsize}px;
+            letter-spacing: ${letterspacing}px;
+            cursor: pointer;
+            border:none;
+            
+        }
+
+        .buttonClass:hover {
+            background-color: ${hovercolor};
+        }
+    `;
+
+  
+    const textarea = document.createElement("textarea");
+    textarea.value = cssCode;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+
+    alert("CSS code copied to clipboard!");
+}
+
+document.getElementById("copyicon").addEventListener("click", copyCode);
+
+</script>
+</html>
